@@ -34,9 +34,11 @@ class TaskController {
         }
     }
 
-    async get(req, res) {
+    async all(req, res) {
         try {
-            await TaskModel.find()
+            const mac = req.body;
+            await TaskModel.find({ macaddress: {'$in': mac.macaddress} })
+            
             .then(data => {
                 return res.status(200).json(data);
             });

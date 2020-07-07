@@ -5,6 +5,6 @@ const TaskController = require('../controller/TaskController');
 router.post('/', TaskController.create);
 router.put('/:id', TaskController.update);
 router.delete('/:id', TaskController.delete);
-router.get('/', TaskController.get);
+router.get('/filter/all', TaskController.all);
 
 module.exports = router;
