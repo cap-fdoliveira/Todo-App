@@ -25,7 +25,7 @@ class TaskController {
 
     async delete(req, res) {
         try {
-            await TaskModel.findOneAndDelete({'_id': req.params.id})
+            await TaskModel.deleteOne({'_id': req.params.id})
             .then(data => {
                 return res.status(200).json(data);
             });
@@ -38,13 +38,28 @@ class TaskController {
         try {
             const mac = req.body;
             await TaskModel.find({ macaddress: {'$in': mac.macaddress} })
-            
+            .sort('date')
             .then(data => {
                 return res.status(200).json(data);
             });
         } catch (err) {
             return res.status(500).json(err);
         }
+    }
+
+    async fetchTaskById(req, res) {
+        try {
+            await TaskModel.findById(req.params.id)
+            .then(data => {
+                if (data) {
+                    return res.status(200).json(data);
+                }
+                return res.status(400).json({err: 'Task not found'})
+            });
+        } catch (err) {
+            return res.status(500).json(err);
+        }
+
     }
 }
 
