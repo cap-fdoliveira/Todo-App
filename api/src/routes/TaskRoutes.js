@@ -9,5 +9,6 @@ router.get('/all', TaskController.all);
 router.get('/:id', TaskController.fetchTaskById);
 router.put('/:id/:done', TaskController.updateTaskStatus);
 router.get('/filter/late', TaskController.taskLate);
+router.get('/filter/today', TaskController.todayTask);
 
 module.exports = router;
