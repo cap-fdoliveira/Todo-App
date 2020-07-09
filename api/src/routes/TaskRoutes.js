@@ -8,6 +8,6 @@ router.delete('/:id', TaskController.delete);
 router.get('/all', TaskController.all);
 router.get('/:id', TaskController.fetchTaskById);
 router.put('/:id/:done', TaskController.updateTaskStatus);
-router.get('/late', TaskController.taskLate);
+router.get('/filter/late', TaskController.taskLate);
 
 module.exports = router;

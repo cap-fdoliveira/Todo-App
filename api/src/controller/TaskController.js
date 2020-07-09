@@ -82,8 +82,8 @@ class TaskController {
     async taskLate(req, res) {
 
         await TaskModel.find({
-            'date': { '$lt': current },
-            'macaddress': { '$in': req.body.macaddress }
+            'macaddress': { '$in': req.body.macaddress },
+            'date': { '$lt': current }
         })
         .sort('date')
             .then(data => {
