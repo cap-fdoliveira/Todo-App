@@ -8,7 +8,7 @@ export const Container = styled.div`
     border-bottom: 5px solid #836FFF;
 `;
 
-export const Logotype = styled.image`
+export const Logotype = styled.div`
     display: flex;
     align-items: center;
     width: 50%;

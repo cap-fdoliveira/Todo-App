@@ -19,7 +19,7 @@ export const Title = styled.div`
     justify-content: center;
 `;
 
-export const Label = styled.text`
+export const Label = styled.div`
     color: #dcdcdc;
     font-size: 22px;
     font-weight: bold;

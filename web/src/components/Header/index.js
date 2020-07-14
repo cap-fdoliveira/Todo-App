@@ -11,11 +11,11 @@ function Header() {
                 <img src={logo} alt="logotipo do app" />
             </Logotype>
             <Menu>
-                <a href="#">Start</a>
+                <a href="#">INÍCIO</a>
                 <span className="divider" />
-                <a href="#">New task</a>
+                <a href="#">NOVA TAREFA</a>
                 <span className="divider" />
-                <a href="#">Sync phone</a>
+                <a href="#">SINCRONIZAR CELULAR</a>
                 <span className="divider" />
                 <a href="#" id="notification">
                     <FiBell size={28}/>

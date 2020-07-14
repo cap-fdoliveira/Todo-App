@@ -6,7 +6,7 @@ export const Container = styled.div`
     margin-top: 40px;
 `;
 
-export const FilterButton = styled.button`
+export const FilterButton = styled.div`
     width: 60%;
     height: 90px;
     margin: auto;
