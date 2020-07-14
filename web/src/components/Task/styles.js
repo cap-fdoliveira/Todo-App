@@ -1,20 +1,23 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    width: 100%;
+    width: 20%;
     height: auto;
     margin-top: 40px;
-    display: flex;
-    justify-content: space-between;
 `;
 
 export const TaskCard = styled.div`
-    width: 20%;
+    width: 80%;
     height: 12em;
     padding: 15px;
-    margin: auto;
+    margin: 20px;
     border-radius: 10px;
     background: #363636;
+    box-shadow: 10px 10px 47px 0px rgba(0,0,0,0.75);
+    cursor: pointer;
+    &:hover{
+        opacity: 0.6;
+    }
 `;
 
 export const Description = styled.div`

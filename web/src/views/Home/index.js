@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, FilterArea } from './styles';
+import { Container, FilterArea, Title, Label, Content } from './styles';
 import Header from '../../components/Header';
 import Filter from '../../components/Filter';
 import Task from '../../components/Task';
@@ -17,7 +17,21 @@ function Home() {
         <Filter title="Month" actived={filter === 'month'} onClick={() => setFilter("month")} />
         <Filter title="Year" actived={filter === 'year'} onClick={() => setFilter("year")} />
       </FilterArea>
-      <Task />
+      <Title>
+        <Label>
+          Tasks
+        </Label>
+      </Title>
+      <Content>
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+      </Content>
       <Footer />
     </Container>
   );

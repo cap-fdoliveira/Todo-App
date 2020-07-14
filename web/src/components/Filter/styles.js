@@ -12,11 +12,14 @@ export const FilterButton = styled.button`
     margin: auto;
     padding: 10px;
     border-radius:10px;
+    border: none;
+    border-color: none;
     background: ${props => props.actived ? '#708090' : '#4F4F4F'};
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
+    box-shadow: 10px 10px 40px 0px rgba(0,0,0,0.75);
 
     span{
         color: #dcdcdc;
