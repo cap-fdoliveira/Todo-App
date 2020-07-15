@@ -9,6 +9,11 @@ export const FilterArea = styled.div`
     height: auto;
     display: flex;
     justify-content: space-between;
+
+    button{
+        background: none;
+        border: none;
+    }
 `;
 
 export const Title = styled.div`

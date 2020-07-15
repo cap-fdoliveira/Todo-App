@@ -4,7 +4,7 @@ import { Container } from './styles';
 function Footer() {
     return (
         <Container>
-            <span>ToDo App - Organized life</span>
+            <span>ToDo App - Vida organizada</span>
         </Container>
     );
 }

@@ -4,7 +4,8 @@ import { Container, Logotype, Menu } from './styles';
 import { FiBell } from 'react-icons/fi';
 
 
-function Header() {
+function Header({ lateCount, clickNtification }) {
+
     return (
         <Container>
             <Logotype>
@@ -17,9 +18,9 @@ function Header() {
                 <span className="divider" />
                 <a href="#">SINCRONIZAR CELULAR</a>
                 <span className="divider" />
-                <a href="#" id="notification">
+                <a href="#" id="notification" onClick={clickNtification}>
                     <FiBell size={28}/>
-                    <span>3</span>
+                <span>{lateCount}</span>
                 </a>
             </Menu>
         </Container>

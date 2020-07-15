@@ -9,32 +9,51 @@ import api from '../../services/api';
 function Home() {
   const [filter, setFilter] = useState('all');
   const [tasks, setTasks] = useState([]);
+  const [lateCount, setLateCount] = useState();
 
-  async function loadTasks() {
-    await api.get(`/task/filter/${filter}/12:12:12:15:AC`)
+  useEffect(() => {
+    (async () => {
+      const { data } = await api.get(`/task/filter/${filter}/12:12:12:15:AC`);
+      setTasks(data);
+      lateVerify();
+      console.log(data);
+    })();
+  }, [filter]);
+
+  async function lateVerify() {
+    await api.get(`/task/filter/late/12:12:12:15:AC`)
     .then(res => {
-      setTasks(res.data);
-      console.log(res.data);
+      setLateCount(res.data.length);
     });
   }
 
-  useEffect(() => {
-    loadTasks();
-  }, [filter]);
+  function notification() {
+    setFilter('late');
+  }
 
   return (
     <Container>
-      <Header />
+      <Header lateCount={lateCount} clickNtification={notification} />
       <FilterArea>
-        <Filter title="Todas" actived={filter === 'all'} onClick={() => setFilter("all")} />
-        <Filter title="Hoje" actived={filter === 'today'} onClick={() => setFilter("today")} />
-        <Filter title="Semana" actived={filter === 'week'} onClick={() => setFilter("week")} />
-        <Filter title="Mês" actived={filter === 'month'} onClick={() => setFilter("month")} />
-        <Filter title="Ano" actived={filter === 'year'} onClick={() => setFilter("year")} />
+        <button type ="button" onClick={() => setFilter("all")}>
+          <Filter title="Todas" actived={filter === 'all'} />
+        </button>
+        <button type ="button" onClick={() => setFilter("today")}>
+          <Filter title="Hoje" actived={filter === 'today'} />
+        </button>
+        <button type ="button" onClick={() => setFilter("week")}>
+          <Filter title="Semana" actived={filter === 'week'} />
+        </button>
+        <button type ="button" onClick={() => setFilter("month")}>
+          <Filter title="Mês" actived={filter === 'month'} />
+        </button>
+        <button type ="button" onClick={() => setFilter("year")}>
+          <Filter title="Ano" actived={filter === 'year'} />
+        </button>
       </FilterArea>
       <Title>
         <Label>
-          Tasks
+          Tarefas
         </Label>
       </Title>
       <Content>
@@ -43,7 +62,7 @@ function Home() {
             <Task
               type={data.type}
               title={data.title}
-              date={data.date} 
+              date={data.date}
             />
           ))
         }
