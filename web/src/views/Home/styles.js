@@ -13,6 +13,7 @@ export const FilterArea = styled.div`
     button{
         background: none;
         border: none;
+        width: 20%;
     }
 `;
 

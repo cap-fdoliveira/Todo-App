@@ -53,7 +53,7 @@ function Home() {
       </FilterArea>
       <Title>
         <Label>
-          Tarefas
+        {filter === 'late' ? 'TAREFAS ATRASADAS' : 'TAREFAS'}
         </Label>
       </Title>
       <Content>

@@ -59,4 +59,10 @@ export const Menu = styled.div`
         font-size: 18px;
     }
 
+    button{
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
 `;

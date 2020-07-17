@@ -18,10 +18,10 @@ function Header({ lateCount, clickNtification }) {
                 <span className="divider" />
                 <a href="#">SINCRONIZAR CELULAR</a>
                 <span className="divider" />
-                <a href="#" id="notification" onClick={clickNtification}>
-                    <FiBell size={28}/>
+                <button id="notification" onClick={clickNtification}>
+                    <FiBell size={28} color="#dcdcdc"/>
                 <span>{lateCount}</span>
-                </a>
+                </button>
             </Menu>
         </Container>
     );
