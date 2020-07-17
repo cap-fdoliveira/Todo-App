@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 import { format } from 'date-fns';
 import { Container, TaskCard, Description, Title, TaskDate, Hour } from './styles';
 import { FiCalendar } from 'react-icons/fi';
 
-function Task({ type, title, date }) {
+function Task({ title, date }) {
 
-    const dateFormat = useMemo(() => format(new Date(date), 'dd/MM/yyyy'));
-    const hourFormat = useMemo(() => format(new Date(date), 'HH:mm'));
+    const dateFormat = useState(() => format(new Date(date), 'dd/MM/yyyy'));
+    const hourFormat = useState(() => format(new Date(date), 'HH:mm'));
 
     return (
         <Container>

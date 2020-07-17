@@ -15,12 +15,12 @@ function Home() {
     (async () => {
       const { data } = await api.get(`/task/filter/${filter}/12:12:12:15:AC`);
       setTasks(data);
-      lateVerify();
+      delayedTask();
       console.log(data);
     })();
   }, [filter]);
 
-  async function lateVerify() {
+  async function delayedTask() {
     await api.get(`/task/filter/late/12:12:12:15:AC`)
     .then(res => {
       setLateCount(res.data.length);
@@ -33,7 +33,7 @@ function Home() {
 
   return (
     <Container>
-      <Header lateCount={lateCount} clickNtification={notification} />
+      <Header lateCount={lateCount} clickNotification={notification} />
       <FilterArea>
         <button type ="button" onClick={() => setFilter("all")}>
           <Filter title="Todas" actived={filter === 'all'} />
