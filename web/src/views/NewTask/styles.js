@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     width: 100%;
+    higth: 100%;
 `;
 
 export const ContentForm = styled.div`
     width: 50%;
-    height: 50em;
+    height: auto;
     margin: auto;
 `;
 
@@ -82,7 +83,7 @@ export const Actions = styled.div`
 `;
 
 export const ActionSave = styled.div`
-    width: 30%;
+    width: 80%;
     margin: 30px auto;
     align-items: center;
 
@@ -91,6 +92,7 @@ export const ActionSave = styled.div`
         margin: auto;
         color: #dcdcdc;
         font-size: 18px;
+        font-weight: bold;
         background: #836FFF;
         border-radius: 5px;
         border: none;

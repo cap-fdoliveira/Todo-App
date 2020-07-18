@@ -5,9 +5,6 @@ const TaskSchema = new Schema({
     macaddress: {
         type: String, required: true
     },
-    type: {
-        type: Number, required: true
-    },
     title: {
         type: String, required: true
     },

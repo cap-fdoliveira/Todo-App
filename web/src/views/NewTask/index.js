@@ -8,6 +8,13 @@ import api from '../../services/api';
 function NewTask() {
 
     const [lateCount, setLateCount] = useState();
+    const [id, setId] = useState();
+    const [done, setDone] = useState(false);
+    const [title, setTitle] = useState();
+    const [description, setDescription] = useState();
+    const [date, setDate] = useState();
+    const [hour, setHour] = useState();
+    const [macaddress, setMacaddress] = useState('12:12:12:15:AC');
 
     useEffect(() => {
         delayedTask();
@@ -20,35 +27,65 @@ function NewTask() {
         });
     }
 
+    async function save() {
+        await api.post(`/task`, {
+            macaddress,
+            title,
+            description,
+            date: `${date}T${hour}:00.000`,
+            done,
+        })
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
     return (
         <Container>
             <Header lateCount={lateCount} clickNotification={Notification}/>
                 <ContentForm>
                     <Input>
                         <span>Título</span>
-                        <input type="text"></input>
+                        <input type="text" 
+                            value={title}
+                            onChange={e => setTitle(e.target.value)}
+                        />
                     </Input>
                     <Description>
                         <span>Descrição da tarefa</span>
-                        <textarea rows={5}/> 
+                        <textarea rows={5}
+                            value={description}
+                            onChange={e => setDescription(e.target.value)}/> 
                     </Description>
                     <Input>
                         <span>Data</span>
-                        <input type="date"></input>
+                        <input type="date" 
+                            value={date}
+                            onChange={e => setDate(e.target.value)}
+                        />
                     </Input>
                     <Input>
                         <span>Hora</span>
-                        <input type="time"></input>
+                        <input type="time" 
+                            value={hour}
+                            onChange={e => setHour(e.target.value)}
+                        />
                     </Input>
                     <Actions>
                         <div>
-                            <input type="checkbox" />
+                            <input type="checkbox" 
+                                checked={done}
+                                onChange={() => setDone(!done)} 
+                            />
                             <span>Concluído</span>
                         </div>
                         <button type="botton">Cancelar</button>
                     </Actions>
                     <ActionSave>
-                        <button type="button">Salvar</button>
+                        <button type="button" onClick={save}>Salvar</button>
                     </ActionSave>
                     
                 </ContentForm>
