@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { Container, ContentForm, Input, Description, Actions, ActionSave } from './styles';
+import { format } from 'date-fns';
 
 import api from '../../services/api';
 
-function NewTask() {
+function NewTask({ match }) {
 
+    const [redirect, setRedirect] = useState(false);
     const [lateCount, setLateCount] = useState();
     const [id, setId] = useState();
     const [done, setDone] = useState(false);
@@ -18,7 +21,18 @@ function NewTask() {
 
     useEffect(() => {
         delayedTask();
+        taskDetail();
     });
+
+    async function taskDetail() {
+        await api.get(`/task/${match.params.id}`)
+        .then(res => {
+            setTitle(res.data.title)
+            setDescription(res.data.description)
+            setDate(format (new Date(res.data.date), 'yyyy-MM-dd'))
+            setHour(format (new Date(res.data.date), 'HH:mm'))
+        });
+    }
 
     async function delayedTask() {
         await api.get(`/task/filter/late/12:12:12:15:AC`)
@@ -28,23 +42,40 @@ function NewTask() {
     }
 
     async function save() {
-        await api.post(`/task`, {
-            macaddress,
-            title,
-            description,
-            date: `${date}T${hour}:00.000`,
-            done,
-        })
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        if (match.params.id) {
+            await api.put(`/task/${match.params.id}`, {
+                macaddress,
+                title,
+                description,
+                date: `${date}T${hour}:00.000`,
+                done,
+            })
+            .then(res => {
+                setRedirect(true)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        } else {
+            await api.post(`/task`, {
+                macaddress,
+                title,
+                description,
+                date: `${date}T${hour}:00.000`,
+                done,
+            })
+            .then(res => {
+                setRedirect(true)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
     }
 
     return (
         <Container>
+            { redirect && <Redirect to='/' />}
             <Header lateCount={lateCount} clickNotification={Notification}/>
                 <ContentForm>
                     <Input>

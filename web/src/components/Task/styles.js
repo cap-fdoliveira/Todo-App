@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    width: 20%;
+    width: 100%;
     height: auto;
     margin-top: 40px;
 `;
@@ -18,6 +18,11 @@ export const TaskCard = styled.div`
     transition: all 0.3s ease;
     &:hover{
         opacity: 0.6;
+    }
+
+    a{
+        width: 80%;
+        height: 12em;
     }
 `;
 

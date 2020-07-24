@@ -5,6 +5,7 @@ import Filter from '../../components/Filter';
 import Task from '../../components/Task';
 import Footer from '../../components/Footer';
 import api from '../../services/api';
+import { Link } from 'react-router-dom';
 
 function Home() {
   const [filter, setFilter] = useState('all');
@@ -16,7 +17,6 @@ function Home() {
       const { data } = await api.get(`/task/filter/${filter}/12:12:12:15:AC`);
       setTasks(data);
       delayedTask();
-      console.log(data);
     })();
   }, [filter]);
 
@@ -59,11 +59,13 @@ function Home() {
       <Content>
         {
           tasks.map(data => (
-            <Task
-              type={data.type}
-              title={data.title}
-              date={data.date}
-            />
+            <Link to={`/task/${data._id}`}>
+              <Task
+                type={data.type}
+                title={data.title}
+                date={data.date}
+              />
+            </Link>
           ))
         }
       </Content>
