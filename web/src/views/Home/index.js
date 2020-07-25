@@ -6,6 +6,7 @@ import Task from '../../components/Task';
 import Footer from '../../components/Footer';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
+import connected from '../../utils/Connected';
 
 function Home() {
   const [filter, setFilter] = useState('all');
@@ -13,7 +14,7 @@ function Home() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get(`/task/filter/${filter}/12:12:12:15:AC`)
+      const { data } = await api.get(`/task/filter/${filter}/${connected}`);
       setTasks(data);
     })();
   }, [filter]);

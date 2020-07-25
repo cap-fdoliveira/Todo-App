@@ -4,40 +4,37 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { Container, ContentForm, Input, Description, Actions, ActionSave } from './styles';
 import { format } from 'date-fns';
+import connected from '../../utils/Connected';
 
 import api from '../../services/api';
 
 function NewTask({ match }) {
 
     const [redirect, setRedirect] = useState(false);
-    // const [id, setId] = useState();
     const [done, setDone] = useState(false);
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [date, setDate] = useState();
     const [hour, setHour] = useState();
-    const [macaddress, setMacaddress] = useState('12:12:12:15:AC');
+    const [macaddress, setMacaddress] = useState(connected);
 
     useEffect(() => {
-        taskDetail();
-    });
-
-    async function taskDetail() {
-        await api.get(`/task/${match.params.id}`)
-        .then(res => {
-            setTitle(res.data.title)
-            setDescription(res.data.description)
-            setDate(format (new Date(res.data.date), 'yyyy-MM-dd'))
-            setHour(format (new Date(res.data.date), 'HH:mm'))
-            setDone(res.data.done)
-        });
-    }
+        if (match.params.id) {
+            (async () => {
+                await api.get(`/task/${match.params.id}`)
+                .then(res => {
+                    setMacaddress(connected)
+                    setTitle(res.data.title)
+                    setDescription(res.data.description)
+                    setDate(format (new Date(res.data.date), 'yyyy-MM-dd'))
+                    setHour(format (new Date(res.data.date), 'HH:mm'))
+                    setDone(res.data.done)
+                });
+            })();
+        }
+    }, [match.params.id]);
 
     async function save() {
-        await treatment();
-    }
-
-    async function treatment() {
         if (match.params.id) {
             await api.put(`/task/${match.params.id}`, {
                 macaddress,

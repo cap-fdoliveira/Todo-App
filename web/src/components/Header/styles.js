@@ -64,5 +64,10 @@ export const Menu = styled.div`
         border: none;
         cursor: pointer;
     }
+    .exitBtn{
+        color: #dcdcdc;
+        font-size: 16px;
+        font-weight: bold;
+    }
 
 `;
