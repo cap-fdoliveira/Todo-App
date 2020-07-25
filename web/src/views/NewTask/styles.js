@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     width: 100%;
-    higth: 100%;
+    height: 100%;
 `;
 
 export const ContentForm = styled.div`
     width: 50%;
     height: auto;
-    margin: auto;
+    margin: 10em auto;
 `;
 
 export const Input = styled.div`

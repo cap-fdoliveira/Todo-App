@@ -15,7 +15,7 @@ function Home() {
   useEffect(() => {
     fetchTasks();    
     delayedTask();
-  }, [filter]);
+  });
 
   async function fetchTasks() {
     await api.get(`/task/filter/${filter}/12:12:12:15:AC`)
@@ -65,6 +65,7 @@ function Home() {
           tasks.map(data => (
             <Link to={`/task/${data._id}`}>
               <Task
+                key= {String(Math.random())}
                 type={data.type}
                 title={data.title}
                 date={data.date}

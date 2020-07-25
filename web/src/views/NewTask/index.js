@@ -43,6 +43,10 @@ function NewTask({ match }) {
     }
 
     async function save() {
+        await treatment();
+    }
+
+    async function treatment() {
         if (match.params.id) {
             await api.put(`/task/${match.params.id}`, {
                 macaddress,
@@ -51,7 +55,7 @@ function NewTask({ match }) {
                 date: `${date}T${hour}:00.000`,
                 done,
             })
-            .then(res => {
+            .then(() => {
                 setRedirect(true)
             })
             .catch(err => {
@@ -65,13 +69,20 @@ function NewTask({ match }) {
                 date: `${date}T${hour}:00.000`,
                 done,
             })
-            .then(res => {
+            .then(() => {
                 setRedirect(true)
             })
             .catch(err => {
                 console.log(err);
             })
         }
+    }
+
+    async function remove() {
+        await api.delete(`/task/${match.params.id}`)
+        .then(() => {
+            setRedirect(true)
+        });
     }
 
     return (
@@ -114,7 +125,7 @@ function NewTask({ match }) {
                             />
                             <span>Concluído</span>
                         </div>
-                        <button type="botton">Cancelar</button>
+                        {match.params.id && <button type="botton" onClick={remove}>Cancelar</button> }
                     </Actions>
                     <ActionSave>
                         <button type="button" onClick={save}>Salvar</button>
