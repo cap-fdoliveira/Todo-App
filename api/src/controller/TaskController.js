@@ -93,7 +93,8 @@ class TaskController {
 
         await TaskModel.find({
             'macaddress': { '$in': req.params.macaddress },
-            'date': { '$lt': current }
+            'date': { '$lt': current },
+            'done': {'$eq': false}
         })
          .sort('date')
          .then(data => {
