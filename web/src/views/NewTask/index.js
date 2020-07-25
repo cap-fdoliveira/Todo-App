@@ -7,6 +7,7 @@ import { Container, ContentForm, Input, Description, Actions, ActionSave } from 
 import { format } from 'date-fns';
 import connected from '../../utils/Connected';
 import NotificationBar from '../../components/NotificationBar';
+import Loading from '../../components/Loading';
 
 import api from '../../services/api';
 
@@ -88,7 +89,9 @@ function NewTask({ match }) {
             { redirect && <Redirect to='/' />}
             <Header clickNotification={Notification}/>
             { snackbar && <NotificationBar data={id}/> }
-                <ContentForm>
+            { snackbar 
+                ? <Loading />
+                : <ContentForm>
                     <Input>
                         <span>Título</span>
                         <input type="text" 
@@ -124,13 +127,14 @@ function NewTask({ match }) {
                             />
                             <span>Concluído</span>
                         </div>
-                        {match.params.id && <button type="botton" onClick={remove}>Cancelar</button> }
+                        {id && <button type="botton" onClick={remove}>Cancelar</button> }
                     </Actions>
                     <ActionSave>
                         <button type="button" onClick={save}>Salvar</button>
                     </ActionSave>
-                    
                 </ContentForm>
+            }
+                
             <Footer />
         </Container>
     );
