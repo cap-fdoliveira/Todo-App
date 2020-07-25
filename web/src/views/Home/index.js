@@ -13,12 +13,16 @@ function Home() {
   const [lateCount, setLateCount] = useState();
 
   useEffect(() => {
-    (async () => {
-      const { data } = await api.get(`/task/filter/${filter}/12:12:12:15:AC`);
-      setTasks(data);
-      delayedTask();
-    })();
+    fetchTasks();    
+    delayedTask();
   }, [filter]);
+
+  async function fetchTasks() {
+    await api.get(`/task/filter/${filter}/12:12:12:15:AC`)
+    .then(res => {
+      setTasks(res.data)
+    });
+  }
 
   async function delayedTask() {
     await api.get(`/task/filter/late/12:12:12:15:AC`)
@@ -64,6 +68,7 @@ function Home() {
                 type={data.type}
                 title={data.title}
                 date={data.date}
+                done={data.done}
               />
             </Link>
           ))

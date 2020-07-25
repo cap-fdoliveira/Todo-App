@@ -22,7 +22,7 @@ function NewTask({ match }) {
     useEffect(() => {
         delayedTask();
         taskDetail();
-    });
+    }, []);
 
     async function taskDetail() {
         await api.get(`/task/${match.params.id}`)
@@ -31,6 +31,7 @@ function NewTask({ match }) {
             setDescription(res.data.description)
             setDate(format (new Date(res.data.date), 'yyyy-MM-dd'))
             setHour(format (new Date(res.data.date), 'HH:mm'))
+            setDone(res.data.done)
         });
     }
 

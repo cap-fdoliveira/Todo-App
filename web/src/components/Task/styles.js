@@ -4,6 +4,7 @@ export const Container = styled.div`
     width: 100%;
     height: auto;
     margin-top: 40px;
+    opacity: ${props => props.done ? 0.5 : 1};
 `;
 
 export const TaskCard = styled.div`
