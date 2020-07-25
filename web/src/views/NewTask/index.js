@@ -10,8 +10,7 @@ import api from '../../services/api';
 function NewTask({ match }) {
 
     const [redirect, setRedirect] = useState(false);
-    const [lateCount, setLateCount] = useState();
-    const [id, setId] = useState();
+    // const [id, setId] = useState();
     const [done, setDone] = useState(false);
     const [title, setTitle] = useState();
     const [description, setDescription] = useState();
@@ -20,9 +19,8 @@ function NewTask({ match }) {
     const [macaddress, setMacaddress] = useState('12:12:12:15:AC');
 
     useEffect(() => {
-        delayedTask();
         taskDetail();
-    }, []);
+    });
 
     async function taskDetail() {
         await api.get(`/task/${match.params.id}`)
@@ -32,13 +30,6 @@ function NewTask({ match }) {
             setDate(format (new Date(res.data.date), 'yyyy-MM-dd'))
             setHour(format (new Date(res.data.date), 'HH:mm'))
             setDone(res.data.done)
-        });
-    }
-
-    async function delayedTask() {
-        await api.get(`/task/filter/late/12:12:12:15:AC`)
-        .then(res => {
-            setLateCount(res.data.length)
         });
     }
 
@@ -88,7 +79,7 @@ function NewTask({ match }) {
     return (
         <Container>
             { redirect && <Redirect to='/' />}
-            <Header lateCount={lateCount} clickNotification={Notification}/>
+            <Header clickNotification={Notification}/>
                 <ContentForm>
                     <Input>
                         <span>Título</span>

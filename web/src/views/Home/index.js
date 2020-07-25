@@ -10,11 +10,9 @@ import { Link } from 'react-router-dom';
 function Home() {
   const [filter, setFilter] = useState('all');
   const [tasks, setTasks] = useState([]);
-  const [lateCount, setLateCount] = useState();
 
   useEffect(() => {
     fetchTasks();    
-    delayedTask();
   });
 
   async function fetchTasks() {
@@ -24,20 +22,13 @@ function Home() {
     });
   }
 
-  async function delayedTask() {
-    await api.get(`/task/filter/late/12:12:12:15:AC`)
-    .then(res => {
-      setLateCount(res.data.length);
-    });
-  }
-
   function notification() {
     setFilter('late');
   }
 
   return (
     <Container>
-      <Header lateCount={lateCount} clickNotification={notification} />
+      <Header clickNotification={notification} />
       <FilterArea>
         <button type ="button" onClick={() => setFilter("all")}>
           <Filter title="Todas" actived={filter === 'all'} />

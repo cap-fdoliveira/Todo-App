@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import logo from '../../assets/logo-todo2.png';
 import { Container, Logotype, Menu } from './styles';
+import api from '../../services/api';
 import { FiBell } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 
-function Header({ lateCount, clickNotification }) {
+function Header({ clickNotification }) {
+
+    const [lateCount, setLateCount] = useState();
+
+    useEffect(() => {
+        delayedTask();
+    }, [lateCount]);
+
+    async function delayedTask() {
+        await api.get(`/task/filter/late/12:12:12:15:AC`)
+        .then(res => {
+          setLateCount(res.data.length);
+        });
+      }
 
     return (
         <Container>
