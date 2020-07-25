@@ -12,15 +12,11 @@ function Home() {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    fetchTasks();    
-  });
-
-  async function fetchTasks() {
-    await api.get(`/task/filter/${filter}/12:12:12:15:AC`)
-    .then(res => {
-      setTasks(res.data)
-    });
-  }
+    (async () => {
+      const { data } = await api.get(`/task/filter/${filter}/12:12:12:15:AC`)
+      setTasks(data);
+    })();
+  }, [filter]);
 
   function notification() {
     setFilter('late');
@@ -54,9 +50,8 @@ function Home() {
       <Content>
         {
           tasks.map(data => (
-            <Link to={`/task/${data._id}`}>
+            <Link to={`/task/${data._id}`} key={data._id}>
               <Task
-                key= {String(Math.random())}
                 type={data.type}
                 title={data.title}
                 date={data.date}
