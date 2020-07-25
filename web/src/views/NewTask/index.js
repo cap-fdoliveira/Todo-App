@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import 'react-toastify/dist/ReactToastify.css';
 import { Container, ContentForm, Input, Description, Actions, ActionSave } from './styles';
 import { format } from 'date-fns';
 import connected from '../../utils/Connected';
+import NotificationBar from '../../components/NotificationBar';
 
 import api from '../../services/api';
 
 function NewTask({ match }) {
 
+    const id = match.params.id;
     const [redirect, setRedirect] = useState(false);
     const [done, setDone] = useState(false);
     const [title, setTitle] = useState();
@@ -17,11 +20,12 @@ function NewTask({ match }) {
     const [date, setDate] = useState();
     const [hour, setHour] = useState();
     const [macaddress, setMacaddress] = useState(connected);
+    const [snackbar, setSnackbar] = useState(false);
 
     useEffect(() => {
-        if (match.params.id) {
+        if (id) {
             (async () => {
-                await api.get(`/task/${match.params.id}`)
+                await api.get(`/task/${id}`)
                 .then(res => {
                     setMacaddress(connected)
                     setTitle(res.data.title)
@@ -32,11 +36,11 @@ function NewTask({ match }) {
                 });
             })();
         }
-    }, [match.params.id]);
+    }, [id]);
 
     async function save() {
-        if (match.params.id) {
-            await api.put(`/task/${match.params.id}`, {
+        if (id) {
+            await api.put(`/task/${id}`, {
                 macaddress,
                 title,
                 description,
@@ -44,10 +48,13 @@ function NewTask({ match }) {
                 done,
             })
             .then(() => {
-                setRedirect(true)
+                setSnackbar(true);
+                setTimeout(() => {
+                    setRedirect(true)
+                }, 2000)
             })
             .catch(err => {
-                console.log(err);
+                return err; 
             })
         } else {
             await api.post(`/task`, {
@@ -58,10 +65,13 @@ function NewTask({ match }) {
                 done,
             })
             .then(() => {
-                setRedirect(true)
+                setSnackbar(true);
+                setTimeout(() => {
+                    setRedirect(true)
+                }, 2000);
             })
             .catch(err => {
-                console.log(err);
+                return err; 
             })
         }
     }
@@ -77,6 +87,7 @@ function NewTask({ match }) {
         <Container>
             { redirect && <Redirect to='/' />}
             <Header clickNotification={Notification}/>
+            { snackbar && <NotificationBar data={id}/> }
                 <ContentForm>
                     <Input>
                         <span>Título</span>

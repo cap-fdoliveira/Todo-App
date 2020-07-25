@@ -8,7 +8,7 @@ export const Container = styled.div`
 `;
 
 export const TaskCard = styled.div`
-    width: 80%;
+    width: 300px;
     height: 12em;
     padding: 15px;
     margin: 20px;

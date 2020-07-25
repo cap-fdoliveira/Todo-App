@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import logo from '../../assets/logo-todo2.png';
+import logo from '../../assets/logo-todo.png';
 import { Container, Logotype, Menu } from './styles';
 import api from '../../services/api';
 import { FiBell } from 'react-icons/fi';
