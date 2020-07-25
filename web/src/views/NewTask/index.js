@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import 'react-toastify/dist/ReactToastify.css';
 import { Container, ContentForm, Input, Description, Actions, ActionSave } from './styles';
 import { format } from 'date-fns';
 import connected from '../../utils/Connected';
